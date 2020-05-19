@@ -1,0 +1,26 @@
+{
+  "name": "bc-functional-ui",
+  "version": "1.0.0",
+  "description": "A functional UI test framework for writing end to end tests",
+  "main": "index.js",
+  "private": true,
+  "author": "Bigcommerce",
+  "scripts": {
+    "test": "./node_modules/.bin/codeceptjs run --steps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bigcommerce-labs/bc-functional-ui"
+  },
+  "dependencies": {
+    "@codeceptjs/configure": "latest",
+    "codeceptjs": "^2.6.5"
+  },
+  "devDependencies": {
+    "@wdio/cli": "^6.1.12",
+    "@wdio/local-runner": "^5.22.1",
+    "@wdio/selenium-standalone-service": "^5.16.10",
+    "import-export": "^1.0.1",
+    "webdriverio": "^6.1.0"
+  }
+}
