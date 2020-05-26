@@ -5,6 +5,10 @@
 npm-debug.log*
 yarn-debug.log*
 
+# misc
+.env
+.env.*
+
 # IDE
 .vscode
 .idea
