@@ -1,0 +1,38 @@
+version: 2.1
+
+orbs:
+  ci: bigcommerce/internal@volatile
+  node: bigcommerce/internal-node@volatile
+
+aliases:
+  - &node_executor
+    executor:
+      name: node/node
+      node-version: "10"
+
+commands:
+  install-dependencies:
+    steps:
+      - ci/pre-setup
+      - node/yarn-install
+
+jobs:
+  install-dependencies:
+    <<: *node_executor
+    steps:
+      - install-dependencies
+
+  unit-tests:
+    <<: *node_executor
+    steps:
+      - install-dependencies
+      - run: yarn run test
+
+workflows:
+  version: 2
+  full:
+    jobs:
+      - run_tests:
+          steps:
+            - unit-tests
+
