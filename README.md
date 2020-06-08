@@ -20,3 +20,14 @@ Once you have cloned the repository, you can start developing on it.
 Start by pulling in the dependencies required.
 Run `npm install` to install the dependencies
 
+## Testing
+
+To see the step-by-step output of running tests, add the --steps flag
+`npx codeceptjs run --steps`
+
+To see very detailed output informations use the --verbose flag:
+`npx codeceptjs run --verbose`
+
+To see a more detailed output add the --debug flag:
+`npx codeceptjs run --debug`
+
