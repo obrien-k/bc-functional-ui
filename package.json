@@ -14,22 +14,30 @@
   },
   "dependencies": {
     "@codeceptjs/configure": "latest",
-    "codeceptjs": "^2.6.5",
     "@wdio/cli": "^6.1.12",
     "@wdio/local-runner": "^5.22.1",
     "@wdio/selenium-standalone-service": "^5.16.10",
+    "bc-store-setup-node": "git+ssh://git@github.com/bigcommerce-labs/bc-store-setup-node.git#master",
+    "chai": "^4.2.0",
+    "codeceptjs": "^2.6.5",
+    "lodash.matches": "^4.6.0",
     "webdriverio": "^6.1.0"
   },
   "devDependencies": {
     "@bigcommerce/validate-commits": "^2.2.0",
+    "@codeceptjs/mock-request": "^0.3.0",
+    "@jest/globals": "latest",
+    "dotenv": "^8.2.0",
     "eslint": "^7.0.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "faker": "^4.1.0",
     "gulp": "^4.0.2",
     "import-export": "^1.0.1",
-    "ng-build": "github:bigcommerce-labs/ng-build"
+    "jest": "^26.0.1",
+    "nock": "^13.0.2"
   }
 }
