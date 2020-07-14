@@ -30,6 +30,9 @@ exports.config = {
       waitForTimeout: 5000,
       testName: '',
     },
+    Mochawesome: {
+      uniqueScreenshotNames: true,
+    },
     MockRequestHelper: {
       require: '@codeceptjs/mock-request',
     },
@@ -53,7 +56,16 @@ exports.config = {
     accountCreation: './src/services/create-account.js',
   },
   bootstrap: {},
-  mocha: {},
+  mocha: {
+    reporterOptions: {
+      mochaFile: './test-reports/Functional_Test_Results.xml',
+      reportPageTitle: 'BC Functional UI Test Suite',
+      reportDir: 'test-reports',
+      reportFilename: 'Test_Report',
+      json: false,
+    }
+  },
+
   name: 'bc-functional-ui',
   plugins: {
     retryFailedStep: {

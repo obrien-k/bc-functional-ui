@@ -26,7 +26,11 @@ jobs:
     <<: *node_executor
     steps:
       - install-dependencies
-      - run: yarn run test
+      - run: ./node_modules/.bin/codeceptjs run --reporter mocha-junit-reporter
+      - store_artifacts:
+          path: ./test-reports
+      - store_test_results:
+          path: ./test-reports
 
 workflows:
   version: 2
