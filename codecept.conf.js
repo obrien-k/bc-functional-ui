@@ -4,26 +4,26 @@ require('@babel/register')({
   extensions: ['.js']
 });
 
+require('import-export');
+require('dotenv').config();
+
 const {
   setHeadlessWhen
 } = require('@codeceptjs/configure');
 const Globals = require("./src/global-constants");
 
-require('import-export');
-require('dotenv').config();
-
 setHeadlessWhen(process.env.HEADLESS);
 
 exports.config = {
-  tests: './test/functional/*-spec.js',
+  tests: './test/functional/!(examples)/*-spec.js',
   output: './logs',
   helpers: {
     REST: {
-      endpoint: Globals.HOST,
+      endpoint: Globals.BMP_HOST,
       onRequest: () => {},
     },
     WebDriver: {
-      url: Globals.HOST,
+      url: Globals.CP_HOST,
       browser: 'chrome',
       port: 4444,
       windowSize: '1500x1000',
@@ -54,6 +54,7 @@ exports.config = {
     loginPage: './src/pages/login-page.js',
     cpSideNavPage: './src/pages/cp-side-nav-page.js',
     userSettingsPage: './src/pages/user-settings-page.js',
+    bmpClientHomePage: './src/pages/billing/client-home-page.js',
 
     //helpers
     loginHelper: './src/helpers/login-helper.js',
@@ -62,7 +63,10 @@ exports.config = {
     //services
     accountCreation: './src/services/create-account.js',
   },
-  bootstrap: {},
+  bootstrapAll: './presettings.js',
+  teardownAll: './presettings.js',
+  bootstrap: './presettings.js',
+  teardown: './presettings.js',
   mocha: {
     reporterOptions: {
       mochaFile: './test-reports/Functional_Test_Results.xml',
@@ -72,7 +76,6 @@ exports.config = {
       json: false,
     }
   },
-
   name: 'bc-functional-ui',
   plugins: {
     retryFailedStep: {

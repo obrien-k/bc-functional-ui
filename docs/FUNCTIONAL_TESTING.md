@@ -74,8 +74,43 @@ either a string or an object.__
 Read more to define your own way of using selectors
 <br/>[CodeceptJS Locators](https://codecept.io/locators/#css-and-xpath)
 
-## Test Setup
-### To Do
+## Spec Files
+CodeceptJS allows for organizing tests in spec files with either features or tests in them.
+You can find the definitions and differences on them in the official documentation on 
+Behavior Driven Development here: 
+<br/>[Behavior Driven Development](https://codecept.io/bdd/#tests-vs-features)
 
-## Test Teardown
-### To Do
+The preferred structure for this repo and other repos that use this framework is the 
+`Feature` spec file structure, with a single pair of Before/After methods, and abstracting
+any functionality that needs to be executed before a test run to the bootstrap/teardown
+methods. 
+
+An example spec file has been included under the test directory, here: 
+`/test/functional/examples/bootstrap-examples-spec.js`
+
+## Bootstrap and Teardown methods
+A `presettings.js` file will be used to include methods for bootstrap and teardown.
+There are two sets of methods for this, the bootstrapAll/teardownAll, and the 
+normal bootstrap/teardown methods.
+
+The normal bootstrap/teardown methods are run at the beginning and at the end of a 
+single worker/process for executing tests. Note that this is not per spec file, 
+but rather, per the whole process. 
+
+The `All` variants of these methods are used exclusively when running tests with
+parallelization, and are run before the tests are split into different child processes, 
+and after all the different workers/processes have finished executing.
+
+More information about this can be found in the official documentation
+<br/>[Bootstrap/Teardown](https://codecept.io/hooks/#bootstrap-teardown)
+
+## Before and After methods
+These are methods that get defined inside of spec files, and are analogous to the
+`beforeEach` and `afterEach` methods used in mocha/jest and many other languages.
+
+The official documentation only mentions them used in the Gherkin style steps files,
+(which you can find here: <br/>[Before/After](https://codecept.io/bdd/#before)), but
+they can be used on spec files as well. However, after some experimentation, some 
+limitations were found when trying to use them in spec files with multiple `Feature` 
+methods, and overriding them within the same spec file is clunky, so it's not recommended.
+

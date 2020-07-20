@@ -9,7 +9,7 @@
     "test": "./node_modules/.bin/jest",
     "test:ci": "JEST_JUNIT_OUTPUT_DIR=test-reports JEST_JUNIT_OUTPUT_NAME=Unit_Test_Results.xml ./node_modules/.bin/jest --ci --reporters=default --reporters=jest-junit",
     "functional:ci": "./node_modules/.bin/codeceptjs run --steps --reporter mocha-junit-reporter",
-    "functional": "./node_modules/.bin/codeceptjs run --steps"
+    "functional": "./node_modules/.bin/codeceptjs run --steps --reporter mochawesome"
   },
   "repository": {
     "type": "git",

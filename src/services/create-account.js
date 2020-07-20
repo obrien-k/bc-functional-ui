@@ -22,7 +22,7 @@ function _buildCreateAccountPayload(email) {
       first_name: contactAttributes.first_name,
       last_name: contactAttributes.last_name,
       company_name: faker.company.companyName,
-      password: Globals.DEFAULT_PASSWORD,
+      password: Globals.TEST_USER_PASSWORD,
       primary_contact_attributes: contactAttributes,
       billing_contact_attributes: contactAttributes
     }
@@ -33,7 +33,7 @@ export async function createAccount(email) {
   console.log(`\nCreating an account with email and password: ${email} and ${AccountData.password}`);
   const createAccountPayload = _buildCreateAccountPayload(email);
   try {
-    const store = new StoreSetupService(Globals.HOST, Globals.clientId, Globals.clientSecret);
+    const store = new StoreSetupService(Globals.BMP_HOST, Globals.CLIENT_ID, Globals.CLIENT_SECRET);
     return await store.createAccount(createAccountPayload);
   } catch {
     const message = `Account creation failed for ${email}!`;
