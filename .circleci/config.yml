@@ -4,39 +4,52 @@ orbs:
   ci: bigcommerce/internal@volatile
   node: bigcommerce/internal-node@volatile
 
-aliases:
-  - &node_executor
-    executor:
-      name: node/node
-      node-version: "10"
+node_executor: &node_executor
+  docker:
+    - image: circleci/node:10-browsers
 
 commands:
   install-dependencies:
     steps:
       - ci/pre-setup
       - node/yarn-install
-
-jobs:
-  install-dependencies:
-    <<: *node_executor
+  unit-test:
     steps:
-      - install-dependencies
-
-  unit-tests:
-    <<: *node_executor
-    steps:
-      - install-dependencies
-      - run: ./node_modules/.bin/codeceptjs run --reporter mocha-junit-reporter
-      - store_artifacts:
-          path: ./test-reports
+      - run:
+          name: Unit Tests # Jest unit tests
+          command: ./node_modules/.bin/codeceptjs run --reporter mocha-junit-reporter
+          # TODO
+          # command: yarn test
       - store_test_results:
           path: ./test-reports
+  # TODO
+  # functional-test:
+  #   steps:
+  #     - run:
+  #         name: Functional Tests # CodeceptJS functional tests
+  #         command: yarn functional:ci
+  #     - store_test_results:
+  #         path: ./test-reports
+
+jobs:
+  unit-tests:
+    <<: *node_executor
+    resource_class: small
+    steps:
+      - install-dependencies
+      - unit-test
+  # TODO
+  # functional-tests:
+  #   <<: *node_executor
+  #   resource_class: small
+  #   steps:
+  #     - install-dependencies
+  #     - functional-test
+
 
 workflows:
-  version: 2
   full:
     jobs:
-      - run_tests:
-          steps:
-            - unit-tests
-
+      - unit-tests
+      # TODO
+      # - functional-tests
