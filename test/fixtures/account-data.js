@@ -1,6 +1,5 @@
-const faker = require('faker');
-const event = require('codeceptjs').event;
-const container = require('codeceptjs').container;
+import faker from 'faker';
+import Globals from './../../src/global-constants';
 
 module.exports = Object.freeze({
   password: faker.internet.password(),
@@ -20,7 +19,7 @@ module.exports = Object.freeze({
 
 
 module.exports = Object.freeze({
-  password: 'Password1!',
+  password: Globals.defaultPassword,
   firstName: 'Clark',
   lastName: 'Kent',
   companyName: 'Daily Planet',
@@ -33,4 +32,4 @@ module.exports = Object.freeze({
     phoneCountryCode: '1',
     phoneNumber: '5557873762'
   }
-})
+});

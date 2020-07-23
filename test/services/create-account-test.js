@@ -1,10 +1,9 @@
 import {
   createAccountFailureMock,
-  createAccountBcSetupNodeSuccessMock
-} from '../mocks/create-account-mocks'
-import {
-  createAccount
-} from './../../src/services/create-account'
+  createAccountBcSetupNodeSuccessMock,
+  createAccountSuccessResp
+} from '../mocks/create-account-mocks';
+import { createAccount } from './../../src/services/create-account';
 
 require('regenerator-runtime');
 
@@ -22,9 +21,7 @@ describe('createAccount', () => {
   it('returns the body on success', async () => {
     createAccountBcSetupNodeSuccessMock();
     const res = await createAccount('example@example.com');
-    expect(res).toMatchObject({
-      id: 1
-    });
+    expect(res).toMatchObject(createAccountSuccessResp);
   });
 });
 

@@ -1,7 +1,7 @@
-import faker from 'faker'
-import StoreSetupService from 'bc-store-setup-node'
-import Globals from './../global-constants'
-import AccountData from '../../test/fixtures/account-data'
+import faker from 'faker';
+import StoreSetupService from 'bc-store-setup-node';
+import Globals from './../global-constants';
+import AccountData from '../../test/fixtures/account-data';
 
 function _buildCreateAccountPayload(email) {
   const contactAttributes = {
@@ -15,18 +15,18 @@ function _buildCreateAccountPayload(email) {
     phone_country_code: faker.address.phoneCountryCode,
     phone_number: faker.address.phoneNumber,
     country: 'US'
-  }
+  };
   return JSON.stringify({
     data: {
       email_address: email,
       first_name: contactAttributes.first_name,
       last_name: contactAttributes.last_name,
       company_name: faker.company.companyName,
-      password: 'Password1!',
+      password: Globals.defaultPassword,
       primary_contact_attributes: contactAttributes,
       billing_contact_attributes: contactAttributes
     }
-  })
+  });
 }
 
 export async function createAccount(email) {
