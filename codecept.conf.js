@@ -1,4 +1,12 @@
-const { setHeadlessWhen } = require('@codeceptjs/configure');
+require('@babel/register')({
+  extends: './.babelrc',
+  ignore: [/node_modules/],
+  extensions: ['.js']
+});
+
+const {
+  setHeadlessWhen
+} = require('@codeceptjs/configure');
 const Globals = require("./src/global-constants");
 
 require('import-export');
@@ -7,7 +15,7 @@ require('dotenv').config();
 setHeadlessWhen(process.env.HEADLESS);
 
 exports.config = {
-  tests: './test/*.js',
+  tests: './test/functional/*-spec.js',
   output: './logs',
   helpers: {
     REST: {
@@ -21,7 +29,7 @@ exports.config = {
       windowSize: '1500x1000',
       desiredCapabilities: {
         chromeOptions: {
-          args: [ '--headless', '--disable-gpu', '--no-sandbox' ]
+          args: ['--headless', '--disable-gpu', '--no-sandbox']
         },
       },
       keepBrowserState: true,
@@ -47,8 +55,6 @@ exports.config = {
     cpSideNavPage: './src/pages/cp-side-nav-page.js',
     userSettingsPage: './src/pages/user-settings-page.js',
     loginHelper: './src/helpers/login-helper.js',
-    AccountData: './src/config/data/account-data.js',
-    Globals: './src/global-constants.js',
 
     /**
      * services

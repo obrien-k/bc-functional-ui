@@ -6,30 +6,31 @@ orbs:
 
 node_executor: &node_executor
   docker:
+    - image: circleci/node:10
+node_browser_executor: &node_browser_executor
+  docker:
     - image: circleci/node:10-browsers
 
 commands:
   install-dependencies:
     steps:
       - ci/pre-setup
-      - node/yarn-install
+      - node/yarn-install:
+          cache_key: v2
   unit-test:
     steps:
       - run:
           name: Unit Tests # Jest unit tests
-          command: ./node_modules/.bin/codeceptjs run --reporter mocha-junit-reporter
-          # TODO
-          # command: yarn test
+          command: yarn test:ci
       - store_test_results:
           path: ./test-reports
-  # TODO
-  # functional-test:
-  #   steps:
-  #     - run:
-  #         name: Functional Tests # CodeceptJS functional tests
-  #         command: yarn functional:ci
-  #     - store_test_results:
-  #         path: ./test-reports
+  functional-test:
+    steps:
+      - run:
+          name: Functional Tests # CodeceptJS functional tests
+          command: yarn functional:ci
+      - store_test_results:
+          path: ./test-reports
 
 jobs:
   unit-tests:
@@ -38,18 +39,15 @@ jobs:
     steps:
       - install-dependencies
       - unit-test
-  # TODO
-  # functional-tests:
-  #   <<: *node_executor
-  #   resource_class: small
-  #   steps:
-  #     - install-dependencies
-  #     - functional-test
-
+  functional-tests:
+    <<: *node_browser_executor
+    resource_class: small
+    steps:
+    - install-dependencies
+    - functional-test
 
 workflows:
   full:
     jobs:
       - unit-tests
-      # TODO
-      # - functional-tests
+      - functional-tests
