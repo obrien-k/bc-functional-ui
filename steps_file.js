@@ -1,4 +1,9 @@
 // in this file you can append custom step methods to 'I' object
+require('@babel/register')({
+  extends: './.babelrc',
+  ignore: [/node_modules/],
+  extensions: ['.js']
+});
 
 module.exports = function() {
   return actor({
