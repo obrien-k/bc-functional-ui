@@ -22,7 +22,7 @@ function _buildCreateAccountPayload(email) {
       first_name: contactAttributes.first_name,
       last_name: contactAttributes.last_name,
       company_name: faker.company.companyName,
-      password: Globals.defaultPassword,
+      password: Globals.DEFAULT_PASSWORD,
       primary_contact_attributes: contactAttributes,
       billing_contact_attributes: contactAttributes
     }
@@ -31,7 +31,7 @@ function _buildCreateAccountPayload(email) {
 
 export async function createAccount(email) {
   console.log(`\nCreating an account with email and password: ${email} and ${AccountData.password}`);
-  const createAccountPayload = _buildCreateAccountPayload();
+  const createAccountPayload = _buildCreateAccountPayload(email);
   try {
     const store = new StoreSetupService(Globals.HOST, Globals.clientId, Globals.clientSecret);
     return await store.createAccount(createAccountPayload);
