@@ -37,6 +37,7 @@ exports.config = {
       smartWait: 5000,
       waitForTimeout: 5000,
       testName: '',
+      restart: false,
     },
     Mochawesome: {
       uniqueScreenshotNames: true,
