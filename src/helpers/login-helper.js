@@ -1,12 +1,14 @@
 const sideNav = require('../pages/cp-side-nav-page');
 const loginPage = require('../pages/login-page');
+const userSettings = require('../helpers/user-settings-helper').default;
+import { defaultTimeout } from '../global-constants';
 
 module.exports = function() {
 
     return actor({
 
         login(email, password) {
-            this.waitForElement(loginPage.selectors.user_email_input, 5);
+            this.waitForElement(loginPage.selectors.user_email_input, defaultTimeout);
             this.fillField(loginPage.selectors.user_email_input, email);
             this.fillField(loginPage.selectors.password_input, password);
             this.click(loginPage.selectors.login_button);
@@ -15,13 +17,11 @@ module.exports = function() {
         },
 
         logoutFromUI() {
-            this.click('Home');
-            this.waitForElement(sideNav.selectors.my_profile_nav);
-            this.click(sideNav.selectors.my_profile_nav);
+            userSettings().navigateToUserSettings();
             this.waitForElement(sideNav.selectors.logout_nav);
             this.click(sideNav.selectors.logout_nav);
             this.dontSee(sideNav.selectors.logout_nav);
-            this.waitForElement(loginPage.selectors.user_email_input);
+            this.waitForElement(loginPage.selectors.user_email_input, defaultTimeout);
         },
 
     });

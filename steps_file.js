@@ -8,8 +8,21 @@ require('@babel/register')({
 module.exports = function() {
   return actor({
 
-    // Define custom steps here, use 'this' to access default methods of I.
-    // It is recommended to place a general 'login' function here.
+    clearTextField(locator) {
+      this.click(locator);
+      this.pressKey(['Shift', 'Home']);
+      this.pressKey('Backspace');
+    },
+
+    replaceTextField(fieldName) {
+      this.appendField(fieldName, '');
+      this.pressKey(['Shift', 'Home']);
+      this.pressKey('Backspace');
+    },
+
+    isElementVisible(selector) {
+      return !this.dontSeeElement(selector);
+    },
 
   });
-}
+};

@@ -46,19 +46,19 @@ exports.config = {
     },
   },
   include: {
-    /**
-     * helpers, page objects
-     */
     I: './steps_file.js',
+
+    //page objects
     basePage: './src/pages/base-page.js',
     loginPage: './src/pages/login-page.js',
     cpSideNavPage: './src/pages/cp-side-nav-page.js',
     userSettingsPage: './src/pages/user-settings-page.js',
-    loginHelper: './src/helpers/login-helper.js',
 
-    /**
-     * services
-     */
+    //helpers
+    loginHelper: './src/helpers/login-helper.js',
+    userSettingsHelper: './src/helpers/user-settings-helper.js',
+
+    //services
     accountCreation: './src/services/create-account.js',
   },
   bootstrap: {},
