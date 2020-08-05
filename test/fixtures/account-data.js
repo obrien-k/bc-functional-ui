@@ -19,7 +19,7 @@ module.exports = Object.freeze({
 
 
 module.exports = Object.freeze({
-  password: Globals.defaultPassword,
+  password: Globals.DEFAULT_PASSWORD,
   firstName: 'Clark',
   lastName: 'Kent',
   companyName: 'Daily Planet',
