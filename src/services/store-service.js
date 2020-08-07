@@ -1,5 +1,5 @@
 import StoreSetupService from 'bc-store-setup-node';
-import { HOST,
+import { BMP_HOST,
     CLIENT_ID,
     CLIENT_SECRET,
     STORE_CREATION_TIMEOUT,
@@ -64,7 +64,7 @@ export async function createStore(account) {
     try {
         console.log(`\nCreating a store with the following account details: \n ${account.store.store_name}`);
         const createStoreProvisioningPayload = _buildStoreProvisioningPayload(account);
-        const storeSetupService = new StoreSetupService(HOST, CLIENT_ID, CLIENT_SECRET);
+        const storeSetupService = new StoreSetupService(BMP_HOST, CLIENT_ID, CLIENT_SECRET);
         requestId = await storeSetupService.createStore(CLIENT_ID, CLIENT_SECRET, createStoreProvisioningPayload);
         return await pollForFulfilledProvisioningRequest(requestId, account);
     } catch {
@@ -76,7 +76,7 @@ export async function createStore(account) {
 
 export async function getStore(storeId) {
     try {
-        const storeSetupService = new StoreSetupService(HOST, CLIENT_ID, CLIENT_SECRET);
+        const storeSetupService = new StoreSetupService(BMP_HOST, CLIENT_ID, CLIENT_SECRET);
         return storeSetupService.getStore(storeId);
     } catch {
         let errorMessage = `Could not retrieve store details for ${storeId}`;

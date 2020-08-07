@@ -10,7 +10,7 @@ Here is an overview of the configuration we have setup:
 * __Webdriver__: `{}` - contains webdriver configuration
 * __include__: `{}` - actors and page objects to be registered in DI container and 
 included in tests. Accepts objects and module require paths
-* __bootstrap__: `./bootstrap.js` - an option to run code before tests are run.
+* __bootstrap__: `./presettings.js` - an option to run code before tests are run.
 * __mocha__: `{}` - mocha options
 * __plugins__: `{}` - contains a list of configurable plugins supported by codeceptjs
 
