@@ -1,6 +1,6 @@
 const sideNav = require('../pages/cp-side-nav-page');
 const loginPage = require('../pages/login-page');
-const bmpClientHomePage = require('../pages/billing/client-home-page');
+const bmpClientHeaderNav = require('../pages/billing/fragments/client-header-nav');
 const userSettings = require('../helpers/user-settings-helper').default;
 
 module.exports = function() {
@@ -26,7 +26,7 @@ module.exports = function() {
         },
 
         logoutFromBMPCUI() {
-            bmpClientHomePage.logout();
+            bmpClientHeaderNav.logout();
         }
 
     });
