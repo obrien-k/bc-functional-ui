@@ -3,7 +3,7 @@ import {
   createAccountBcSetupNodeSuccessMock,
   createAccountSuccessResp
 } from '../mocks/create-account-mocks';
-import { createAccount } from './../../src/services/create-account';
+const createAccount = require('./../../src/services/create-account');
 
 require('regenerator-runtime');
 
@@ -12,7 +12,7 @@ describe('createAccount', () => {
     createAccountFailureMock();
     expect.assertions(1);
     try {
-      await createAccount('example@example.com');
+      await createAccount('example@example.com', 'non-trial');
     } catch(e) {
       expect(e).toEqual("Account creation failed for example@example.com!")
     }
@@ -20,7 +20,7 @@ describe('createAccount', () => {
 
   it('returns the body on success', async () => {
     createAccountBcSetupNodeSuccessMock();
-    const res = await createAccount('example@example.com');
+    const res = await createAccount('example@example.com', 'non-trial');
     expect(res).toMatchObject(createAccountSuccessResp);
   });
 });

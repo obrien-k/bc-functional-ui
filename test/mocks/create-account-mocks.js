@@ -4,7 +4,7 @@ import matches from 'lodash.matches';
 
 export const createAccountSuccessResp = {
   email: 'example@example.com',
-  company_name: AccountData.companyName,
+  company_name: 'Bigcommerce',
   password: AccountData.password
 };
 
@@ -14,9 +14,7 @@ export const createAccountErrorResp = {
 
 const matcherDataLocal = {
   data: {
-    primary_contact_attributes: {
-      country: 'US'
-    }
+    email_address: 'example@example.com'
   }
 };
 
@@ -28,7 +26,7 @@ export const createAccountFailureMock = () => {
 
 export const createAccountBcSetupNodeSuccessMock = () => {
   nock(/https/)
-    .matchHeader('accept', 'application/json, text/plain, */*')
+    .matchHeader('Content-Type', 'application/json')
     .post('/api/v1/accounts/', matches(matcherDataLocal))
     .reply(200, createAccountSuccessResp)
 };

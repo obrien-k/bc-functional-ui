@@ -1,43 +1,66 @@
 import faker from 'faker';
 import StoreSetupService from 'bc-store-setup-node';
 import Globals from './../global-constants';
-import AccountData from '../../test/fixtures/account-data';
 
-function _buildCreateAccountPayload(email) {
+function _buildCreateAccountPayload(emailAddr) {
   const contactAttributes = {
-    first_name: faker.name.firstName,
-    last_name: faker.name.lastName,
-    email_address: email,
-    street_address_1: faker.address.streetAddress,
-    city: faker.address.city,
-    state: faker.address.state,
-    postal_code: faker.address.postalCode,
-    phone_country_code: faker.address.phoneCountryCode,
-    phone_number: faker.address.phoneNumber,
+    first_name: faker.name.firstName(),
+    last_name: faker.name.lastName(),
+    email_address: emailAddr,
+    street_address_1: '211 E 7th Street',
+    city: 'Austin',
+    state: 'TX',
+    postal_code: '78701',
+    phone_country_code: '1',
+    phone_number: '8181818181',
     country: 'US'
   };
+
   return JSON.stringify({
     data: {
-      email_address: email,
+      email_address: contactAttributes.email_address,
       first_name: contactAttributes.first_name,
-      last_name: contactAttributes.last_name,
-      company_name: faker.company.companyName,
+      last_name: contactAttributes.lastName,
+      company_name: faker.company.companyName(),
       password: Globals.TEST_USER_PASSWORD,
       primary_contact_attributes: contactAttributes,
-      billing_contact_attributes: contactAttributes
-    }
+      billing_contact_attributes: contactAttributes,
+    },
   });
 }
 
-export async function createAccount(email) {
-  console.log(`\nCreating an account with email and password: ${email} and ${AccountData.password}`);
-  const createAccountPayload = _buildCreateAccountPayload(email);
+function _buildCreateTrialAccountPayload(emailAddr) {
+  const contactAttributes = {
+    first_name: faker.name.firstName(),
+    last_name: faker.name.lastName(),
+    email_address: emailAddr,
+    is_trial: 1,
+    state: 'TX',
+    country: 'US'
+  };
+
+  return JSON.stringify({
+    data: {
+      email_address: emailAddr,
+      company_name: faker.company.companyName(),
+      password: Globals.TEST_USER_PASSWORD,
+      primary_contact_attributes: contactAttributes,
+      billing_contact_attributes: contactAttributes,
+    },
+  });
+}
+
+async function createAccount(emailAddr, type) {
+  console.log(`\nCreating an account with email : ${emailAddr}`);
+  const createAccountPayload = (type === 'non-trial' ? _buildCreateAccountPayload(emailAddr) : _buildCreateTrialAccountPayload(emailAddr));
   try {
     const store = new StoreSetupService(Globals.BMP_HOST, Globals.CLIENT_ID, Globals.CLIENT_SECRET);
     return await store.createAccount(createAccountPayload);
-  } catch {
-    const message = `Account creation failed for ${email}!`;
+  } catch(error) {
+    const message = `Account creation failed for ${emailAddr}!`;
     console.log(message);
     throw message;
   }
 }
+
+module.exports = createAccount;
