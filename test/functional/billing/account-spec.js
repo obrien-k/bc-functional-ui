@@ -1,6 +1,6 @@
 import {BMP_HOST, TEST_USER_EMAIL, TEST_USER_PASSWORD} from '../../../src/global-constants'
 
-Feature.skip('Client UI: Account');
+Feature('Client UI: Account');
 
 Before((I, loginHelper) => {
     I.amOnPage(BMP_HOST);
