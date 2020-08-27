@@ -1,15 +1,14 @@
-const { I } = inject();
+const { I, bmpClientHeaderNav } = inject();
 
 module.exports = {
-    selectors: {
-        storeNameField: 'div.bui-panel.store-name-panel',
-        upgradeButton: '.subscription-upgrade',
-        subscriptionLabel: '.subscription-plan',
-        invoicesLink: '.subscription-actions > a:nth-child(1)',
-        logoutLink: '#logout-button'
-    },
 
-    logout() {
-        I.click(this.selectors.logoutLink);
+    root: '#content',
+    storeNameField: 'div.bui-panel.store-name-panel',
+    storesPanel: {
+        subscriptionLabel: '.subscription-plan',
+    },
+    primaryContactPanel: {
+        updateAccountDetailsLink: "//a[contains(text(),'Update account details')]",
+        updateBillingDetailsLink: "//a[contains(text(),'Update billing details')]",
     }
 };

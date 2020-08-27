@@ -54,11 +54,17 @@ exports.config = {
     loginPage: './src/pages/login-page.js',
     cpSideNavPage: './src/pages/cp-side-nav-page.js',
     userSettingsPage: './src/pages/user-settings-page.js',
+
+    //billing page objects
     bmpClientHomePage: './src/pages/billing/client-home-page.js',
+    bmpClientAccountPage: './src/pages/billing/client-account-page.js',
+    bmpClientEditAccountPage: './src/pages/billing/client-edit-account-page.js',
+    bmpClientHeaderNav: './src/pages/billing/fragments/client-header-nav.js',
 
     //helpers
     loginHelper: './src/helpers/login-helper.js',
     userSettingsHelper: './src/helpers/user-settings-helper.js',
+    bmpAccountHelper: './src/helpers/billing/account-details-helper.js',
 
     //services
     accountCreation: './src/services/create-account.js',
