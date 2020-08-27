@@ -92,7 +92,22 @@ exports.config = {
     },
     wdio: {
       enabled: true,
-      services: ['selenium-standalone']
+      services: ['selenium-standalone'],
+      seleniumInstallArgs: {
+        drivers: {
+          chrome: {
+            version: '85.0.4183.83',
+            baseURL: "https://chromedriver.storage.googleapis.com"
+          }
+        }
+      },
+      seleniumArgs: {
+        drivers: {
+          chrome: {
+            version: '85.0.4183.83'
+          }
+        }
+      }
     }
   }
 };
