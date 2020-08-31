@@ -1,4 +1,4 @@
-import {BMP_HOST, TEST_USER_EMAIL, TEST_USER_PASSWORD} from '../../../src/global-constants'
+import {BMP_HOST, TEST_USER_EMAIL, TEST_USER_PASSWORD} from '../../../src/global-constants';
 
 Feature('Client UI: Account');
 
