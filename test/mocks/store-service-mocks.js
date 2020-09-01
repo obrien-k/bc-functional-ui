@@ -1,12 +1,18 @@
 import nock from 'nock';
-import StoreData from '../fixtures/store-data';
+import { storeData } from '../fixtures/store-data';
 
 const getStoreRequestPathRegEx = /\/api\/v1\/provisioning_requests\/*/;
 
+export const req_id = {
+    data: {
+        id: 123
+    }
+};
+
 export const createStoreSuccessResp = {
-    account_id: StoreData.account_id,
-    store_name: StoreData.store.store_name,
-    requestId: 123
+    account_id: storeData.account_id,
+    store_name: storeData.options.store.store_name,
+    requestId: req_id
 };
 
 export const getStoreSuccessResp = {
@@ -35,6 +41,11 @@ export const createStoreProvisioningFailureMock = () => {
 };
 
 export const createStoreProvisioningSuccessMock = () => {
+    const requestId = {
+        data: {
+            id: 123
+        }
+    };
     nock(/https/)
         .post('/api/v1/provisioning_requests/')
         .reply(200, createStoreSuccessResp);
